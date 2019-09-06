@@ -1,4 +1,4 @@
-package traveller;
+package controller;
 
 public class RoundCounter {
 

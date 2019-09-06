@@ -2,27 +2,27 @@ package rooms;
 
 import util.Direction;
 
-public class Controller {
+public class RoomManager {
 
 	private final static int SIZE = 15;
-	private static Controller instance;
+	private static RoomManager instance;
 	private Room[][] rooms;
 
 	public int size() {
-		return Controller.SIZE;
+		return RoomManager.SIZE;
 	}
 	
 	public boolean OOB(int row, int column) {
 		return isOutOfBounds(row, column);
 	}
 	
-	private Controller() {
+	private RoomManager() {
 		this.rooms = new Room[SIZE][SIZE];
 	}
 
-	public static synchronized Controller getInstance() {
+	public static synchronized RoomManager getInstance() {
 		if (instance == null) {
-			instance = new Controller();
+			instance = new RoomManager();
 		}
 		return instance;
 	}

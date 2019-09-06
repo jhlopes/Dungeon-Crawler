@@ -8,7 +8,7 @@ public class Generator {
 	
 	private static Generator instance;
 	private static Random r = new Random(); 
-	static Controller ctr = Controller.getInstance();
+	static RoomManager ctr = RoomManager.getInstance();
 	private static int[] starters;
 	
 	private Generator() {

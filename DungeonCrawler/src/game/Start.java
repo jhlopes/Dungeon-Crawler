@@ -1,38 +1,58 @@
 package game;
 
-import traveller.MovementController;
-import traveller.RoundCounter;
+import controller.MenuController;
+import controller.MovementController;
+import controller.RoundCounter;
+import types.MenuType;
 import util.Direction;
 import util.Input;
 
 public class Start {
 
 	public static void main(String[] args) {
-		
-		MovementController mvCtr = MovementController.getInstance();
+		MenuController menuController =  MenuController.getInstance();
+		MovementController movementController = MovementController.getInstance();
+//		FightController fightController = FightController.getInstance();
+//		InventoryController inventoryController = InventoryController.getInstance();
 		Input input = Input.getInstance();
 		
 		while(true) {
-			
-			mvCtr.printRoomDescription();
-			input.getInputChooseAction();
-			switch (input.getDesiredAction()) {
-			case 1: //move
-				input.getInputMove(mvCtr.getRoomOptions());
-				mvCtr.movePlayer(input.getMoveInput());
+		
+			menuController.printRoomDescriptionPreview();
+			menuController.printMainMenuOptions();
+
+			input.setPlayerInput();
+			switch (input.getMainMenuInput()) {
+			case MOVE: //move
+				menuController.setMoveMenuOptions();
+				menuController.printCurrentMenuOptions();
+				input.setPlayerInput();
+				movementController.executePlayerInput(input.getMoveInput(menuController.getCurrentOptions()));
 				break;
-			case 3:
-				input.getInputInventory(mvCtr.getPlayerOptions());
-				mvCtr.inventoryAction(input.getDesiredAction());
-				break;
-			case 5: //look
-				input.getInputLook(mvCtr.getRoomOptions());
-				break;
+//			case FIGHT: //fight
+//				menuController.printFightMenuOptions();
+//				input.setPlayerInput(MenuType.FIGHT);
+//				fightController.executePlayerInput(input.getFightInput);
+//				//input.getInputFight(movementController.getRoomOptions());
+//				break;
+//			case INVENTORY: //inventory
+//				menuController.printInventoryMenuOptions();
+//				input.setPlayerInput(MenuType.INVENTORY);
+//				inventoryController.executePlayerInput(input.getFightInput);
+//				//input.getInputInventory(movementController.getPlayerOptions());
+//				//movementController.inventoryAction(input.getDesiredAction());
+//				break;
+//			case SEARCH:
+//				
+//				break;
+//			case LOOK: //look
+//				input.getInputLook(movementController.getRoomOptions());
+//				break;
 			default:
 				break;
 			}
 			
-			System.out.println("::>> " + RoundCounter.round());
+			System.out.println("CurrentRound: " + RoundCounter.round());
 			
 		}
 		

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import items.Furniture;
 import items.Item;
+import util.Description;
 
 public class RoomObjects {
 
@@ -49,6 +50,18 @@ public class RoomObjects {
 
 	public String getEnemyDescription(int pos) {
 		return this.listEnemies.get(pos).getDescription();
+	}
+
+	public List<Description> getAllEnemyDescriptions() {
+		if (this.hasEnemies()) {
+			List<Description> listEnemyDescription = new ArrayList<Description>();
+			for (int i = 0; i < this.listEnemies.size(); i++) {
+				listEnemyDescription.add(new Description(this.listEnemies.get(i).getDescription()));
+			}
+			return listEnemyDescription;
+		} else {
+			return null;
+		}
 	}
 
 	public int numberOfFurniture() {

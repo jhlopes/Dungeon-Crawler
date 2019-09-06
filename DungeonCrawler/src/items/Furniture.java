@@ -15,9 +15,9 @@ public class Furniture {
 				"cheap", "elegant", "solid", "nice", "rustic", "massive", "traditional", "polished", "ancient", "used",
 				"functional", "shabby", "ornamental", "lovely", "handmade", "broken", "broken", "broken", "broken",
 				"broken" };
-		String[] furniture = { "armchair", "bathtub", "bed", "chair", "coffee table", "dishwasher", "dresser", "lamp",
-				"microwave oven", "refrigerator", "rug", "table", "lamp", "chair", "table", "wardrobe", "chest",
-				"chest", "chest", "chest", "cupboard" };
+		String[] furniture = { "Armchair", "Bathtub", "Bed", "Chair", "Coffee table", "Dishwasher", "Dresser", "Lamp",
+				"Microwave oven", "Refrigerator", "Rug", "Table", "Lamp", "Chair", "Table", "Wardrobe", "Chest",
+				"Chest", "Chest", "Cupboard" };
 		this.description = new Description("furniture");
 		this.description.name = furniture[r.nextInt(furniture.length)];
 		this.description.text = "It is a " + adjective[r.nextInt(adjective.length)] + " " + this.description.name;

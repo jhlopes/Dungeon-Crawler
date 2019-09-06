@@ -42,7 +42,7 @@ public class Enemy {
 	}
 
 	public Description getDescriptionText() {
-		String[] adjectives = { "hairy", "tall", "gay", "short", "nice", "strong", "deformed", "thin", "fat", "weak",
+		String[] adjectives = { "hairy", "tall", "short", "nice", "strong", "deformed", "thin", "fat", "weak",
 				"stupid", "chaser", "giver" };
 		Random r = new Random();
 		Description description = new Description("enemy");
