@@ -65,31 +65,11 @@ public class Input {
 		case 5:
 			return MenuType.LOOK;
 		default:
-			return null;
+			return MenuType.NULL;
 		}
 
 	}
 
-	public Direction getMoveInput() {
-		if (currentInputInteger < 0) {
-			if (currentInputString.equalsIgnoreCase("north"))
-				return Direction.UP;
-			if (currentInputString.equalsIgnoreCase("south"))
-				return Direction.DOWN;
-			if (currentInputString.equalsIgnoreCase("west"))
-				return Direction.LEFT;
-			if (currentInputString.equalsIgnoreCase("east"))
-				return Direction.RIGHT;
-		}
-		List<Integer> directions = new ArrayList<Integer>();
-		for (int i = 0; i < 4; i++) {
-			if (MenuController.getInstance().getCurrentRoom().hasEntrance(Direction.intDirection(i))) {
-				directions.add(i);
-			}
-		}
-		return Direction.intDirection(directions.get(currentInputInteger - 1));
-
-	}
 
 	public Direction getMoveInput(List<MenuOption> moveOptions) {
 		if (currentInputInteger < 0) {
@@ -108,18 +88,14 @@ public class Input {
 		} else {
 			for (int i = 0; i < moveOptions.size(); i++) {
 				if (currentInputInteger == moveOptions.get(i).id) {
-					switch (moveOptions.get(i).text) {
-					case "north":
+					if (moveOptions.get(i).text.equalsIgnoreCase("north"))
 						return Direction.UP;
-					case "south":
+					if (moveOptions.get(i).text.equalsIgnoreCase("south"))
 						return Direction.DOWN;
-					case "east":
-						return Direction.RIGHT;
-					case "west":
+					if (moveOptions.get(i).text.equalsIgnoreCase("west"))
 						return Direction.LEFT;
-					default:
-						return null;
-					}
+					if (moveOptions.get(i).text.equalsIgnoreCase("east"))
+						return Direction.RIGHT;
 				}
 			}
 		}

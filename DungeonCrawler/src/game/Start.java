@@ -48,6 +48,8 @@ public class Start {
 //			case LOOK: //look
 //				input.getInputLook(movementController.getRoomOptions());
 //				break;
+			case NULL:
+				break;
 			default:
 				break;
 			}

@@ -2,6 +2,7 @@ package rooms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import player.RoomObjects;
 import util.Description;
@@ -10,6 +11,7 @@ import util.Direction;
 public class Room {
 
 	private static int globalID;
+	private char name;
 	private int id;
 	private Room[] adjacentRooms;
 	private boolean[] entrances;
@@ -24,6 +26,13 @@ public class Room {
 		} else {
 			this.roomObjects = new RoomObjects(true);
 		}
+		char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		Random r = new Random();
+		char randomChar = alphabet[r.nextInt(alphabet.length)];
+		if (r.nextInt(2) == 0) {
+			randomChar = Character.toUpperCase(randomChar);
+		}
+		this.name = randomChar;
 	}
 
 	public RoomObjects getObjects() {
@@ -68,26 +77,7 @@ public class Room {
 
 	@Override
 	public String toString() {
-		if (this.id + 65 > 122) {
-			if (this.id >= 58 && this.id <= 64) {
-				return Character.toString((char) (this.id + 6)) + "";
-			} else if (this.id > 122) {
-				if (this.id - 65 >= 58 && this.id - 65 <= 64) {
-					return Character.toString((char) (this.id - 65 + 6)) + "";
-				} else {
-					return Character.toString((char) (this.id - 65)) + "";
-				}
-			} else {
-				return Character.toString((char) (this.id)) + "";
-			}
-		} else {
-			if (this.id >= 58 && this.id <= 64) {
-				return Character.toString((char) (this.id + 71)) + "";
-			} else {
-				return Character.toString((char) (this.id + 65)) + "";
-			}
-		}
-//		return Character.toString((char) 300);
+		return Character.toString(this.name);
 	}
 
 	public int getID() {
