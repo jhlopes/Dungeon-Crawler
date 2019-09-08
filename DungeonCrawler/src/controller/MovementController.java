@@ -9,6 +9,7 @@ public class MovementController extends Controller {
 
 	private static int currentRow;
 	private static int currentColumn;
+	private static Room currentRoom;
 	private static Room[][] rooms;
 	private static MovementController instance;
 
@@ -16,7 +17,6 @@ public class MovementController extends Controller {
 	public static synchronized MovementController getInstance() {
 		if (instance == null) {
 			instance = new MovementController();
-
 		}
 		return instance;
 	}
@@ -28,10 +28,6 @@ public class MovementController extends Controller {
 		currentColumn = gen.getStarters()[1];
 		currentRoom = rooms[currentRow][currentColumn];
 		currentRoom.getObjects().setPlayer(true);
-	}
-
-	public void printRoomDescription() {
-		
 	}
 
 	public void movePlayer(Direction directionInput) {

@@ -1,5 +1,6 @@
 package game;
 
+import controller.FightController;
 import controller.MenuController;
 import controller.MovementController;
 import controller.RoundCounter;
@@ -10,14 +11,16 @@ import util.Input;
 public class Start {
 
 	public static void main(String[] args) {
+		System.out.println("cuck");
+		int x = 3;
 		MenuController menuController =  MenuController.getInstance();
 		MovementController movementController = MovementController.getInstance();
-//		FightController fightController = FightController.getInstance();
-//		InventoryController inventoryController = InventoryController.getInstance();
+		FightController fightController = FightController.getInstance();
+		InventoryController inventoryController = InventoryController.getInstance();
 		Input input = Input.getInstance();
-		
+
 		while(true) {
-		
+
 			menuController.printRoomDescriptionPreview();
 			menuController.printMainMenuOptions();
 
@@ -48,15 +51,15 @@ public class Start {
 //			case LOOK: //look
 //				input.getInputLook(movementController.getRoomOptions());
 //				break;
-			case NULL:
-				break;
-			default:
-				break;
-			}
-			
-			System.out.println("CurrentRound: " + RoundCounter.round());
-			
+//			case NULL:
+//				break;
+//			default:
+//				break;
+//			}
+//
+//			System.out.println("CurrentRound: " + RoundCounter.round());
+//
 		}
 		
-	}
+	//}
 }
