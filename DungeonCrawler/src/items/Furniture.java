@@ -9,7 +9,10 @@ public class Furniture {
 	private Description description;
 
 	public Furniture() {
-		Random r = new Random();
+		this.description = generateDescription();
+	}
+
+	private Description generateDescription() {
 		String[] adjective = { "old", "new", "antique", "fine", "heavy", "modern", "little", "only", "wooden",
 				"upholstered", "beautiful", "rich", "comfortable", "expensive", "simple", "costly", "dark", "broken",
 				"cheap", "elegant", "solid", "nice", "rustic", "massive", "traditional", "polished", "ancient", "used",
@@ -18,10 +21,11 @@ public class Furniture {
 		String[] furniture = { "Armchair", "Bathtub", "Bed", "Chair", "Coffee table", "Dishwasher", "Dresser", "Lamp",
 				"Microwave oven", "Refrigerator", "Rug", "Table", "Lamp", "Chair", "Table", "Wardrobe", "Chest",
 				"Chest", "Chest", "Cupboard" };
-		this.description = new Description("furniture");
-		this.description.name = furniture[r.nextInt(furniture.length)];
-		this.description.text = "It is a " + adjective[r.nextInt(adjective.length)] + " " + this.description.name;
-
+		Random r = new Random();
+		Description description = new Description("furniture");
+		description.name = furniture[r.nextInt(furniture.length)];
+		description.text = "It is a " + adjective[r.nextInt(adjective.length)] + " " + description.name;
+		return description;
 	}
 
 	public Description getDescription() {
