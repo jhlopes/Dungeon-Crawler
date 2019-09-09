@@ -4,33 +4,35 @@ import controller.FightController;
 import controller.MenuController;
 import controller.MovementController;
 import controller.RoundCounter;
+import text_util.MenuOptionText;
 import types.MenuType;
 import util.Direction;
 import util.Input;
+import util.Printer;
 
 public class Start {
 
 	public static void main(String[] args) {
-		System.out.println("cuck");
-		int x = 3;
-		MenuController menuController =  MenuController.getInstance();
+
+		MenuController menuController = MenuController.getInstance();
 		MovementController movementController = MovementController.getInstance();
 		FightController fightController = FightController.getInstance();
-		InventoryController inventoryController = InventoryController.getInstance();
+		// InventoryController inventoryController = InventoryController.getInstance();
 		Input input = Input.getInstance();
 
-		while(true) {
+		while (true) {
 
-			menuController.printRoomDescriptionPreview();
-			menuController.printMainMenuOptions();
-
-			input.setPlayerInput();
-			switch (input.getMainMenuInput()) {
-			case MOVE: //move
-				menuController.setMoveMenuOptions();
-				menuController.printCurrentMenuOptions();
-				input.setPlayerInput();
-				movementController.executePlayerInput(input.getMoveInput(menuController.getCurrentOptions()));
+			Printer.printCurrentRoomGeneralDescription(
+					MenuOptionText.getRoomGeneralDescription(movementController.getCurrentRoom()));
+			Printer.printOptions(MenuOptionText.getMainMenuOptionsText());
+			input.setPlayerInput(Printer.lastMaxOptions);
+			switch (input.getInput(MenuOptionText.getMainMenuOptionsText())) {
+			case "Move": // move
+				Printer.printOptions(MenuOptionText
+						.addBackAndId(MenuOptionText.getMoveOptionsText(movementController.getCurrentRoom())));
+				input.setPlayerInput(Printer.lastMaxOptions);
+				movementController.executeMove(input.getMoveOutput(MenuOptionText
+						.addBackAndId(MenuOptionText.getMoveOptionsText(movementController.getCurrentRoom()))));
 				break;
 //			case FIGHT: //fight
 //				menuController.printFightMenuOptions();
@@ -55,11 +57,10 @@ public class Start {
 //				break;
 //			default:
 //				break;
-//			}
+			}
 //
 //			System.out.println("CurrentRound: " + RoundCounter.round());
 //
 		}
-		
-	//}
+	}
 }

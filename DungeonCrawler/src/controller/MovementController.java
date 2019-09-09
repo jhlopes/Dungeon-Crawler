@@ -4,6 +4,7 @@ import player.Player;
 import rooms.Generator;
 import rooms.Room;
 import util.Direction;
+import util.Printer;
 
 public class MovementController extends Controller {
 
@@ -48,6 +49,18 @@ public class MovementController extends Controller {
 	public void executePlayerInput(Direction moveInput) {
 		if (moveInput == null) {
 			MenuController.throwInvalidInput();
+			return;
+		}
+		movePlayer(moveInput);
+	}
+
+	public Room getCurrentRoom() {
+		return currentRoom;
+	}
+
+	public void executeMove(Direction moveInput) {
+		if (moveInput == null) {
+			Printer.printBreak();
 			return;
 		}
 		movePlayer(moveInput);

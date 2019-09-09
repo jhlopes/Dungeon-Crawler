@@ -11,109 +11,62 @@ import player.Descriptable;
 import player.Enemy;
 import player.Player;
 import rooms.Room;
+import text_util.Option;
 import types.MenuType;
 
 public class Input {
 
-    private static Input instance;
-    private static String currentInputString;
-    private static int currentInputInteger;
-    Scanner sc = new Scanner(System.in);
+	private static Input instance;
+	private static String currentInputString;
+	private static int currentInputInteger;
+	Scanner sc = new Scanner(System.in);
 
-    public static Input getInstance() {
-        if (instance == null) {
-            instance = new Input();
+	public static Input getInstance() {
+		if (instance == null) {
+			instance = new Input();
 
-        }
-        return instance;
-    }
+		}
+		return instance;
+	}
 
-    private Input() {
+	private Input() {
 
-    }
+	}
 
-    public void setPlayerInput() {
-        getInputFromPlayer();
-    }
+	public void setPlayerInput(int maxInputs) {
+		getInputFromPlayer(maxInputs);
+	}
 
-    private void getInputFromPlayer() {
-        MenuController.getInstance().print("> ");
-        currentInputString = sc.next();
-        try {
-            currentInputInteger = Integer.parseInt(currentInputString);
-        } catch (Exception e) {
-            currentInputInteger = -1;
-        }
+	private void getInputFromPlayer(int maxInputs) {
+		Printer.printInputPrompt();
+		currentInputString = sc.next();
+		try {
+			currentInputInteger = Integer.parseInt(currentInputString);
+			if (currentInputInteger > maxInputs) {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			currentInputInteger = -1;
+		}
 
-    }
+	}
 
-    public MenuType getMainMenuInput() {
-        if (currentInputInteger < 0) {
-            List<String> listMenus = MenuController.getInstance().getMenuList();
-            for (int i = 0; i < listMenus.size(); i++) {
-                if (currentInputString.equalsIgnoreCase(listMenus.get(i)))
-                    currentInputInteger = (i + 1);
-            }
-        }
-        switch (currentInputInteger) {
-            case 1:
-                return MenuType.MOVE;
-            case 2:
-                return MenuType.FIGHT;
-            case 3:
-                return MenuType.INVENTORY;
-            case 4:
-                return MenuType.SEARCH;
-            case 5:
-                return MenuType.LOOK;
-            default:
-                return MenuType.NULL;
-        }
+	public String getInput(List<Option> listOptions) {
+		for (int i = 0; i < listOptions.size(); i++) {
+			if (currentInputInteger == listOptions.get(i).getOptionId()) {
+				return listOptions.get(i).getOptionText();
+			}
+		}
+		return null;
+	}
 
-    }
+	public Direction getMoveOutput(List<Option> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getOptionId() == currentInputInteger) {
+				return Direction.parseDirection(list.get(i).getOptionText());
+			}
+		}
+		return null;
+	}
 
-
-    public Direction getMoveInput(List<MenuOption> moveOptions) {
-        if (currentInputInteger < 0) {
-            for (int i = 0; i < moveOptions.size(); i++) {
-                if (currentInputString.equalsIgnoreCase(moveOptions.get(i).text)) {
-                    if (currentInputString.equalsIgnoreCase("north"))
-                        return Direction.UP;
-                    if (currentInputString.equalsIgnoreCase("south"))
-                        return Direction.DOWN;
-                    if (currentInputString.equalsIgnoreCase("west"))
-                        return Direction.LEFT;
-                    if (currentInputString.equalsIgnoreCase("east"))
-                        return Direction.RIGHT;
-                }
-            }
-        } else {
-            for (int i = 0; i < moveOptions.size(); i++) {
-                if (currentInputInteger == moveOptions.get(i).id) {
-                    if (moveOptions.get(i).text.equalsIgnoreCase("north"))
-                        return Direction.UP;
-                    if (moveOptions.get(i).text.equalsIgnoreCase("south"))
-                        return Direction.DOWN;
-                    if (moveOptions.get(i).text.equalsIgnoreCase("west"))
-                        return Direction.LEFT;
-                    if (moveOptions.get(i).text.equalsIgnoreCase("east"))
-                        return Direction.RIGHT;
-                }
-            }
-        }
-        return null;
-    }
-
-    public boolean showInputOptions(List<Object> listToGetOptions) {
-        if (listToGetOptions == null) return false;
-        System.out.println("1 - Back");
-        for (int i = 0; i < listToGetOptions.size(); i++) {
-            System.out.println((i + 2) + " - " + ((Descriptable) listToGetOptions.get(i)).getDescription().name);
-        }
-        getInputFromPlayer();
-        if (currentInputInteger <= 1 || currentInputInteger >= listToGetOptions.size() + 1) {
-            return false;
-        }
-        return true;
-    }
 }

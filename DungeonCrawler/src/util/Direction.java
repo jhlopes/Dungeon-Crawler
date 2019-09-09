@@ -5,11 +5,11 @@ import java.util.Random;
 public enum Direction {
 
 	UP, DOWN, LEFT, RIGHT;
-	
+
 	public int value() {
 		switch (this) {
 		case RIGHT:
-			return 0;	
+			return 0;
 		case UP:
 			return 1;
 		case LEFT:
@@ -20,7 +20,7 @@ public enum Direction {
 			return -1;
 		}
 	}
-	
+
 	public static Direction intDirection(int i) {
 		switch (i) {
 		case 0:
@@ -35,7 +35,7 @@ public enum Direction {
 			return null;
 		}
 	}
-	
+
 	public static Direction randomDirection(Random r) {
 		switch (r.nextInt(4)) {
 		case 0:
@@ -50,7 +50,7 @@ public enum Direction {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		switch (this) {
@@ -66,7 +66,7 @@ public enum Direction {
 			return "ERROR";
 		}
 	}
-	
+
 	public Direction opposite() {
 		switch (this) {
 		case RIGHT:
@@ -97,7 +97,7 @@ public enum Direction {
 			return -1;
 		}
 	}
-	
+
 	public int getNextPositionColumn(int column) {
 		switch (this) {
 		case RIGHT:
@@ -112,6 +112,18 @@ public enum Direction {
 			return -1;
 		}
 	}
-	
-	
+
+	public static Direction parseDirection(String optionText) {
+		if (optionText.equalsIgnoreCase("west"))
+			return LEFT;
+		if (optionText.equalsIgnoreCase("east"))
+			return RIGHT;
+		if (optionText.equalsIgnoreCase("north"))
+			return UP;
+		if (optionText.equalsIgnoreCase("south"))
+			return DOWN;
+
+		return null;
+	}
+
 }
